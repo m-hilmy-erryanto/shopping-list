@@ -1,8 +1,20 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1>Shopping List Page</h1>
+{% block meta %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% endblock meta %}
 
+{% block content %}
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a style="font-size: 24px; font-weight: bold;"> 🛒 Shopping List Page</a>
+        <span>Welcome, {{ name }}</span>
+            <a href="{% url 'main:logout' %}">
+                <i class="fa fa-sign-out fa-2x text-danger" aria-hidden="true"></i>
+            </a>
+      </form>
+    </div>
+  </nav>
     <h5>Name:</h5>
     <p>{{name}}</p>
 
@@ -25,6 +37,20 @@
             <td>{{product.price}}</td>
             <td>{{product.description}}</td>
             <td>{{product.date_added}}</td>
+            <td>
+                <a href="{% url 'main:edit_product' product.pk %}">
+                    <button>
+                        Edit
+                    </button>
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'main:delete_product' product.pk %}">
+                    <button>
+                        Delete
+                    </button>
+                </a>
+            </td>
         </tr>
     {% endfor %}
 </table>
@@ -39,9 +65,4 @@
 
 <h5>Sesi terakhir login: {{ last_login }}</h5>
 
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>
 {% endblock content %}
